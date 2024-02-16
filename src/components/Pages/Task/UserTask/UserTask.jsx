@@ -22,7 +22,7 @@ const UserTask = () => {
   // update task complete or pending
   const handleUpdateTask = (task) => {
 
-    axios.patch(`http://localhost:5000/task/${task._id}`)
+    axios.patch(`https://task-management-server-six-zeta.vercel.app/task/${task._id}`)
     .then((data)=>{
         if(data.data.modifiedCount>0){
             Swal.fire({

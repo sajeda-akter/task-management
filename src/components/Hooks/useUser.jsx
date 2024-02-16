@@ -10,7 +10,7 @@ const useUser = () => {
     queryKey: ["users"],
     queryFn: async () => {
       const res = await publicSecure(
-        `http://localhost:5000/users?email=${user.email}`
+        `https://task-management-server-six-zeta.vercel.app/users?email=${user.email}`
       );
       return res.data;
     },

@@ -40,7 +40,7 @@ export const routers=createBrowserRouter([
         children:[
             {
                 path:'taskdetails/:id',
-                loader:({params})=>fetch(`http://localhost:5000/task/${params.id}`),
+                loader:({params})=>fetch(`https://task-management-server-six-zeta.vercel.app/task/${params.id}`),
                 element:<TaskDetails/>
             },
             {

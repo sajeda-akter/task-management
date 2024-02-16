@@ -49,7 +49,7 @@ const AuthProvider = ({children}) => {
             setLoading(false)
             setUser(currentUser)
             if(currentUser){
-                axios.post('http://localhost:5000/jwt')
+                axios.post('https://task-management-server-six-zeta.vercel.app/jwt')
                 .then(res=>{
                   
                     if(res.data.token){

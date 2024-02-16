@@ -33,7 +33,7 @@ const users=useUser()
         photoURL,
       };
       axios
-        .patch(`http://localhost:5000/users/${userId}`, userInfo)
+        .patch(`https://task-management-server-six-zeta.vercel.app/users/${userId}`, userInfo)
         .then((data) => {
           if (data.data.modifiedCount > 0) {
             Swal.fire({
