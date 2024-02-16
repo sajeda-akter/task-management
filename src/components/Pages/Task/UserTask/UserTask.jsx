@@ -6,6 +6,7 @@ import { Table } from "flowbite-react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
+import TitleSection from "../../../../Hooks/TitleSection";
 
 const UserTask = () => {
   const { user } = useContext(AuthContext);
@@ -26,7 +27,7 @@ const UserTask = () => {
         if(data.data.modifiedCount>0){
             Swal.fire({
                 title: "Updated!",
-                text: "Update your task complete.",
+                text: "Update your task status.",
                 icon: "success",
                 timer: 1000,
               });
@@ -37,6 +38,7 @@ const UserTask = () => {
   };
   return (
     <div>
+      <TitleSection pageName={'FinTask || My Task'}></TitleSection>
       <div className="overflow-x-auto">
         <Table striped>
           <Table.Head>

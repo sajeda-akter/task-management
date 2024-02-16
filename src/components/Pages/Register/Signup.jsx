@@ -7,9 +7,10 @@ import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import { sendEmailVerification } from "firebase/auth";
 import PublicAxiosSecure from "../../Hooks/PublicAxiosSecure";
+import TitleSection from "../../../Hooks/TitleSection";
 
 const Signup = () => {
-  const publicSecure=PublicAxiosSecure()
+  const publicSecure = PublicAxiosSecure();
   const {
     register,
     handleSubmit,
@@ -30,20 +31,20 @@ const Signup = () => {
     });
 
     if (res.data.success) {
-      createUser(data.email, data.password)
-      .then((result) => {
+      createUser(data.email, data.password).then((result) => {
         const photoURL = res.data.data.display_url;
-        //    const number=parseInt(data.number)
 
-        updateUser(data.name, photoURL).then(() => {
-          const userInfo={
-            user:data.name,
-            email:data.email,
-            role:'employee'
-          }
+        updateUser(data.name, photoURL)
+        .then(() => {
+       
+             const userInfo = {
+            user: data.name,
+            email: data.email,
+            role: "employee",
+            photoURL,
+          };
+
           publicSecure.post('/users',userInfo)
-          .then(()=>{
-            sendEmailVerification(result.user)
           .then(()=>{
             Swal.fire({
               position: "center",
@@ -52,33 +53,19 @@ const Signup = () => {
               showConfirmButton: false,
               timer: 1000,
             });
-            
+          })
+       
+          reset()
 
-          })
-          })
-         
-         
           
-          
-        })
-        reset();
-        console.log(result.user);
-      })
-      .catch(err=>
-        {
-          Swal.fire({
-            position: "center",
-            icon: "error",
-            title:(err.message),
-            showConfirmButton: false,
-            timer: 2000,
-          });
-        }
-         )
+        });
+      });
     }
   };
   return (
     <div className="">
+      <TitleSection pageName={"Fintask || Signup"} />
+
       <form
         onSubmit={handleSubmit(handleSignup)}
         className="lg:w-2/4 w-11/12 bg-[#D9EDBF] rounded-md p-12  mx-auto mt-32 shadow-xl"
@@ -97,8 +84,6 @@ const Signup = () => {
           <p className="text-red-700 my-1 font-medium">Name is required</p>
         )}
 
-        {/* <FloatingLabel {...register('number',{required:true,maxLength:11, minLength:10})} type="number" variant="filled" label="Enter your number" color="success" /> */}
-        {/* {errors.number && <p className="text-red-700 my-1 font-medium">Number must be 11 digit</p>} */}
         <FloatingLabel
           {...register("email")}
           type="text"

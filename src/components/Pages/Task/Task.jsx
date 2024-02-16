@@ -7,6 +7,7 @@ import { FloatingLabel, Select } from "flowbite-react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import { useQuery } from "@tanstack/react-query";
+import TitleSection from "../../../Hooks/TitleSection";
 
 const Task = () => {
   const publicSecure = PublicAxiosSecure();
@@ -67,11 +68,13 @@ const Task = () => {
     <p>Please pick a day.</p>
   );
   return (
-    <form
+    <div>
+            <TitleSection pageName={'Fintask || Add Task'}/>
+            <form
       onSubmit={handleSubmit(taskSubmit)}
-      className="lg:w-3/4 w-11/12 bg-[#D9EDBF] rounded-md p-12  mx-auto mt-32 shadow-xl"
+      className="lg:w-3/4 w-11/12 bg-[#D9EDBF] rounded-md p-12  mx-auto mt-2 shadow-xl"
     >
-      <h1 className="border-b-4 border-[#508D69] text-[#4E9F3D] font-bold px-2 w-56 text-2xl mb-12 pb-2 mx-auto text-center ">
+      <h1 className="border-y-2 border-[#508D69] text-[#4E9F3D] font-bold px-2 w-56 text-2xl mb-12 pb-2 mx-auto text-center ">
         Create your task
       </h1>
 
@@ -125,7 +128,7 @@ const Task = () => {
         </div>
       </div>
 
-      <div className="flex items-center justify-around text-xl">
+      <div className="flex flex-col lg:flex-row items-center justify-around text-xl">
         <p> {footer} </p>
         <DayPicker
           mode="single"
@@ -144,6 +147,8 @@ const Task = () => {
         </button>
       </div>
     </form>
+    </div>
+    
   );
 };
 

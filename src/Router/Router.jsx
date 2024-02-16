@@ -9,6 +9,8 @@ import TaskDetails from "../components/Pages/Task/TaskDetails/TaskDetails";
 import AllTask from "../components/Pages/Task/AllTask/AllTask";
 import UserTask from "../components/Pages/Task/UserTask/UserTask";
 import PrivateRouter from "./PrivateRouter";
+import ProfileSetting from "../components/Pages/ProfileSetting/ProfileSetting";
+import Employees from "../components/Dashboard/EmployList/Employees";
 
 export const routers=createBrowserRouter([
     {
@@ -27,6 +29,7 @@ export const routers=createBrowserRouter([
                 path:'/signup',
                 element:<Signup/>
             },
+           
            
         ]
 
@@ -51,6 +54,14 @@ export const routers=createBrowserRouter([
             {
                 path:'alltask',
                 element:<AllTask/>
+            },
+            {
+                path:'profile',
+                element:<ProfileSetting/>
+            },
+            {
+                path:'employee',
+                element:<Employees/>
             }
         ]
     }

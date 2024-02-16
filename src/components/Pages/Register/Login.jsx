@@ -4,6 +4,7 @@ import { AuthContext } from "../../../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import TitleSection from "../../../Hooks/TitleSection";
 
 const Login = () => {
   const [errorUser,setErrorUser]=useState('')
@@ -11,7 +12,7 @@ const Login = () => {
   const { userLogin ,handleReset} = useContext(AuthContext);
   const navigate=useNavigate()
   const location=useLocation()
-  console.log(location)
+
 
 const handleLogin=(e)=>{
   e.preventDefault()
@@ -21,28 +22,39 @@ const handleLogin=(e)=>{
   .then(result=>{
     console.log(result.user)
     navigate(location.state?location.state:'/')
-    if(result.user.emailVerified){
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "user successfully login",
-        showConfirmButton: false,
-        timer: 1000,
-      });
-      e.target.email.value=""
-      e.target.password.value=""
-    }
-    else{
-      Swal.fire({
-        position: "center",
-        icon: "error",
-        title: "Please verify your account.Check your inbox",
-        showConfirmButton: false,
-        timer: 2000,
-      });
-      e.target.email.value=""
-      e.target.password.value=""
-    }
+   
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "user successfully login",
+      showConfirmButton: false,
+      timer: 1000,
+    });
+    e.target.email.value=""
+    e.target.password.value=""
+   
+    // if(result.user.emailVerified){
+    //   Swal.fire({
+    //     position: "center",
+    //     icon: "success",
+    //     title: "user successfully login",
+    //     showConfirmButton: false,
+    //     timer: 1000,
+    //   });
+    //   e.target.email.value=""
+    //   e.target.password.value=""
+    // }
+    // else{
+    //   Swal.fire({
+    //     position: "center",
+    //     icon: "error",
+    //     title: "Please verify your account.Check your inbox",
+    //     showConfirmButton: false,
+    //     timer: 2000,
+    //   });
+    //   e.target.email.value=""
+    //   e.target.password.value=""
+    // }
   })
   .catch(err=>{setErrorUser(err.message)})
 }
@@ -75,6 +87,7 @@ handleReset(email)
 }
   return (
     <div className="">
+      <TitleSection pageName={'Fintask || Login'}/>
       <form
         onSubmit={handleLogin}
         className="lg:w-2/4 w-11/12 bg-[#D9EDBF] rounded-md p-12  mx-auto mt-32 shadow-xl"
