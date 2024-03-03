@@ -1,16 +1,16 @@
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import PublicAxiosSecure from "../../Hooks/PublicAxiosSecure";
 import { format } from "date-fns";
 import Swal from "sweetalert2";
 import { FloatingLabel, Select } from "flowbite-react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import { useQuery } from "@tanstack/react-query";
-import TitleSection from "../../../Hooks/TitleSection";
+import TitleSection from "../../Hooks/TitleSection";
+import usePublicAxiosSecure from "../../Hooks/usePublicAxiosSecure";
 
 const Task = () => {
-  const publicSecure = PublicAxiosSecure();
+  const publicSecure = usePublicAxiosSecure();
   const { data: users = [] } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
@@ -18,6 +18,7 @@ const Task = () => {
       return res.data;
     },
   });
+
   const [selectedDay, setSelectedDay] = useState(new Date());
 
   const {

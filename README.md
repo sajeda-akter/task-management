@@ -1,8 +1,16 @@
-# React + Vite
+Project_name:Task Management Site
+live-site: https://task-managemnet-467a5.web.app
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+#feature and technology
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+* A employee can see his task related info.Also he can update his task status.
+* Also a user can change his prodile information like:name,image
+* admin can assign a task specific employee.
+* Also he can see all task info like:pending,complete and over due .
+* Admin can payment a employee.
+
+
+* Frontend: React Js,TanStack,React-router-dom,Stripe payment,Axios,Moment Js,Firebase etc
+* Backend:Express Js,Mongodb Js,Stripe MailGun
+

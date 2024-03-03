@@ -1,22 +1,22 @@
 import { useLoaderData } from "react-router-dom";
-import TitleSection from "../../../../Hooks/TitleSection";
 import { Card } from "flowbite-react";
+import TitleSection from "../../../Hooks/TitleSection";
 
 const TaskDetails = () => {
   const task = useLoaderData();
-  console.log(task);
+
   return (
     <div>
       <TitleSection pageName={"Fintask || Task Details"} />
 
     <p className="border-y-2 border-[#1B1A55] w-72 font-bold text-red-400 mt-10 text-center text-3xl p-2 mx-auto">Task Details</p>
-      <Card className="max-w-md mt-5 mx-auto text-white bg-[#1B1A55] lg:mt-12" horizontal>
+      <Card className="max-w-lg mt-5 mx-auto text-white bg-[#1B1A55] lg:mt-12" horizontal>
         <h5 className="text-2xl font-bold tracking-tight ">
           <span className=" font-medium text-red-300">Task: </span> {task.task}
         </h5>
         <p className="font-normal ">
           <span className="text-xl font-medium text-red-300"> Details: </span>{" "}
-          {task.description.slice(0, 50)}...
+          {task.description}
         </p>
         <p>
           <span className="text-xl font-medium text-red-300">Date: </span>{" "}

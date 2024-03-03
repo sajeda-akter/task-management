@@ -11,6 +11,9 @@ import UserTask from "../components/Pages/Task/UserTask/UserTask";
 import PrivateRouter from "./PrivateRouter";
 import ProfileSetting from "../components/Pages/ProfileSetting/ProfileSetting";
 import Employees from "../components/Dashboard/EmployList/Employees";
+import AdminRoute from "../components/Dashboard/AdminRoute/AdminRoute";
+import Payment from "../components/Dashboard/Payment/Payment";
+import PaymentHistory from "../components/Dashboard/PaymentHistory/PaymentHistory";
 
 export const routers=createBrowserRouter([
     {
@@ -49,11 +52,15 @@ export const routers=createBrowserRouter([
             },
             {
                 path:'task',
-                element:<Task/>
+                element:<AdminRoute><Task/></AdminRoute>
+            },
+            {
+                path:'paymentHistory',
+                element:<PaymentHistory/>
             },
             {
                 path:'alltask',
-                element:<AllTask/>
+                element:<AdminRoute><AllTask/></AdminRoute>
             },
             {
                 path:'profile',
@@ -61,7 +68,12 @@ export const routers=createBrowserRouter([
             },
             {
                 path:'employee',
-                element:<Employees/>
+                element:<AdminRoute><Employees/></AdminRoute>
+            },
+            {
+                path:'payment/:id',
+                loader:({params})=>fetch(`https://task-management-server-six-zeta.vercel.app/users/${params.id}`),
+                element:<AdminRoute><Payment/></AdminRoute>
             }
         ]
     }

@@ -1,4 +1,5 @@
 import { Banner } from "flowbite-react";
+import imgBanner from '../../../../assets/banner2.png'
 
 const HomeBanner = () => {
     return (
@@ -10,7 +11,7 @@ const HomeBanner = () => {
       <p className="text-slate-300 mt-4">Task management is the process of overseeing a task through its lifecycle. It involves planning, testing, tracking, and reporting. Task management can help individuals achieve goals or enable groups of individuals to collaborate and share knowledge for the accomplishment of collective goals.[1] Tasks are also differentiated by complexity, from low to high.</p>
 </div>
         
-        <img src="/src/assets/banner2.png " className="lg:w-2/4" alt="" />
+        <img src={imgBanner} className="lg:w-2/4" alt="" />
 
         </div>
       </Banner>

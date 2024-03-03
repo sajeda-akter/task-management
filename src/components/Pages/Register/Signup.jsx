@@ -5,12 +5,12 @@ import { AuthContext } from "../../../AuthProvider/AuthProvider";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
-import { sendEmailVerification } from "firebase/auth";
-import PublicAxiosSecure from "../../Hooks/PublicAxiosSecure";
-import TitleSection from "../../../Hooks/TitleSection";
+// import { sendEmailVerification } from "firebase/auth";
+import usePublicAxiosSecure from "../../Hooks/usePublicAxiosSecure";
+import TitleSection from "../../Hooks/TitleSection";
 
 const Signup = () => {
-  const publicSecure = PublicAxiosSecure();
+  const publicSecure = usePublicAxiosSecure();
   const {
     register,
     handleSubmit,
@@ -19,6 +19,7 @@ const Signup = () => {
   } = useForm();
   const { createUser, updateUser } = useContext(AuthContext);
   const handleSignup = async (data) => {
+
     const imgFile = { image: data.photo[0] };
     const imaageHosting = `https://api.imgbb.com/1/upload?key=${
       import.meta.env.VITE_REACT_IMGBB_KEY
@@ -31,7 +32,9 @@ const Signup = () => {
     });
 
     if (res.data.success) {
+      
       createUser(data.email, data.password).then((result) => {
+        console.log(result.user)
         const photoURL = res.data.data.display_url;
 
         updateUser(data.name, photoURL)
@@ -42,7 +45,11 @@ const Signup = () => {
             email: data.email,
             role: "employee",
             photoURL,
+            salary:data.salary
+
           };
+          
+          
 
           publicSecure.post('/users',userInfo)
           .then(()=>{
@@ -54,7 +61,7 @@ const Signup = () => {
               timer: 1000,
             });
           })
-       
+       .catch(err=>console.log('error when signup',err))
           reset()
 
           
@@ -80,8 +87,15 @@ const Signup = () => {
           label="Enter your name"
           color="success"
         />
-        {errors.name && (
-          <p className="text-red-700 my-1 font-medium">Name is required</p>
+        <FloatingLabel
+          {...register("salary", { required: true })}
+          type="text"
+          variant="filled"
+          label="Enter your salary"
+          color="success"
+        />
+        {errors.salary && (
+          <p className="text-red-700 my-1 font-medium">Salary is required</p>
         )}
 
         <FloatingLabel

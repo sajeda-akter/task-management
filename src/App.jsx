@@ -5,10 +5,11 @@ import { routers } from "./Router/Router"
 function App() {
 
   return (
-    <div >
+    < >
+      
           <RouterProvider router={routers}></RouterProvider>
 
-    </div>
+    </>
 
     )
 }

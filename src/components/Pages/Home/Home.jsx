@@ -1,4 +1,4 @@
-import TitleSection from "../../../Hooks/TitleSection";
+import TitleSection from "../../Hooks/TitleSection";
 import HomeBanner from "./HomeDetails/HomeBanner";
 
 const Home = () => {

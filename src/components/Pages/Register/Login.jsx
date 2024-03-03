@@ -4,7 +4,7 @@ import { AuthContext } from "../../../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import TitleSection from "../../../Hooks/TitleSection";
+import TitleSection from "../../Hooks/TitleSection";
 
 const Login = () => {
   const [errorUser,setErrorUser]=useState('')

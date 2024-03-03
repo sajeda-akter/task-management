@@ -1,20 +1,19 @@
 import { Button, FileInput, Label, TextInput } from "flowbite-react";
-import TitleSection from "../../../Hooks/TitleSection";
-import { useContext } from "react";
-import { AuthContext } from "../../../AuthProvider/AuthProvider";
 import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
-import PublicAxiosSecure from "../../Hooks/PublicAxiosSecure";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import useUser from "../../Hooks/useUser";
+import usePublicAxiosSecure from "../../Hooks/usePublicAxiosSecure";
+import TitleSection from "../../Hooks/TitleSection";
 
 const ProfileSetting = () => {
-  const { register, handleSubmit, reset } = useForm();
-const users=useUser()
+  const publicSecure = usePublicAxiosSecure();
+  const { register, handleSubmit } = useForm();
+  const [users, refetch] = useUser();
 
   // update user info
   const userId = users[0]?._id;
+
   const handleUpdateUser = async (data) => {
     const imgFile = { image: data.photo[0] };
     const imaageHosting = `https://api.imgbb.com/1/upload?key=${
@@ -28,25 +27,25 @@ const users=useUser()
     });
     if (res.data.success) {
       const photoURL = res.data.data.display_url;
+
       const userInfo = {
         user: data.user,
         photoURL,
       };
-      axios
-        .patch(`https://task-management-server-six-zeta.vercel.app/users/${userId}`, userInfo)
-        .then((data) => {
-          if (data.data.modifiedCount > 0) {
-            Swal.fire({
-              title: "Updated!",
-              text: "Update your Information.",
-              icon: "success",
-              timer: 1000,
-            });
-          }
-          reset();
-        });
+      publicSecure.patch(`/users/${userId}`, userInfo).then((data) => {
+        if (data.data.modifiedCount > 0) {
+          Swal.fire({
+            title: "Updated!",
+            text: "Update your Information.",
+            icon: "success",
+            timer: 1000,
+          });
+          refetch();
+        }
+      });
     }
   };
+
   return (
     <div>
       <TitleSection pageName={"FinTask || Profile Setting"}></TitleSection>
@@ -71,6 +70,7 @@ const users=useUser()
               defaultValue={employee.email}
               placeholder=""
               required
+              readOnly
             />
           </div>
           <div>
@@ -92,12 +92,7 @@ const users=useUser()
             <FileInput {...register("photo")} id="file-upload-helper-text" />
           </div>
 
-          <Button
-            //  onClick={()=>handleUpdateUser(employee)}
-            type="submit"
-          >
-            Save
-          </Button>
+          <Button type="submit">Save</Button>
         </form>
       ))}
     </div>
