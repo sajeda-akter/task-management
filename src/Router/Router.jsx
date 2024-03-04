@@ -14,10 +14,12 @@ import Employees from "../components/Dashboard/EmployList/Employees";
 import AdminRoute from "../components/Dashboard/AdminRoute/AdminRoute";
 import Payment from "../components/Dashboard/Payment/Payment";
 import PaymentHistory from "../components/Dashboard/PaymentHistory/PaymentHistory";
+import ErrorPage from "../components/ErrorPage/ErrorPage";
 
 export const routers=createBrowserRouter([
     {
         path:'/',
+        errorElement:ErrorPage,
         element:<Main/>,
         children:[
             {
